@@ -1,0 +1,46 @@
+﻿@using Ski_Rental
+@using Ski_Rental.Models
+@model IEnumerable<Ski_Rental.Models.Narty>
+
+@{
+    ViewBag.Title = "Wypożyczalnia nart i butów narciarskich";
+}
+
+<h2>Wybierz sprzęt do wypożyczenia:</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <h3>Narty:</h3>
+        <ul>
+            @foreach (var item in ViewBag.Narty)
+            {
+                <li>
+                    @( item.Nazwa)
+                    <a href="@Url.Action("Rezerwuj", "Home", new { id = item.IDNarty, typSprzetu = "narty" })" class="btn btn-primary" role="button">Zarezerwuj</a>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <h3>Buty narciarskie:</h3>
+        <ul>
+            @foreach (var item in ViewBag.ButyNarciarskie)
+            {
+                <li>
+                    @( item.Nazwa)
+                    <a href="@Url.Action("Rezerwuj", "Home", new { id = item.IDButyNarciarskie, typSprzetu = "buty" })" class="btn btn-primary" role="button">Zarezerwuj</a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success">@ViewBag.SuccessMessage</div>
+}
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+}
